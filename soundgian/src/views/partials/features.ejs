@@ -1,0 +1,28 @@
+<%
+const icons = {
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  wave: '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+  plug: '<path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/>',
+  sliders: '<path d="M6 3v18M12 3v18M18 3v18M4 9h4M10 14h4M16 8h4"/>',
+  door: '<path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17M3 21h18M10 12h.01"/>',
+  gauge: '<path d="M4 17a9 9 0 1 1 16 0M12 14l4-5"/>',
+  phones: '<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="5" height="7" rx="2"/><rect x="16" y="14" width="5" height="7" rx="2"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 0 5 5L11 20a2.1 2.1 0 0 1-3-3z"/>'
+};
+%>
+<section class="features">
+  <h2>¿Qué Vas A Aprender <span class="c-orange">Con Este Ebook?</span></h2>
+  <p class="lead">Todo lo esencial sobre <b class="c-blue">sonido en vivo</b>, explicado de forma <b>clara y práctica</b>, sin tecnicismos innecesarios.</p>
+  <div class="grid">
+    <% features.forEach(f => { %>
+      <article class="card">
+        <header>
+          <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><%- icons[f.icon] %></svg></span>
+          <h3><%= f.title %></h3>
+        </header>
+        <p><%= f.text %></p>
+      </article>
+    <% }) %>
+  </div>
+  <p class="pill">Un manual práctico y directo al grano para que tu sonido sea impecable.</p>
+</section>

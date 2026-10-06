@@ -1,0 +1,66 @@
+<%- include('../partials/head') %>
+<%
+const val = (k) => values[k] || '';
+const field = (id, label, type, ph, auto) => `
+  <div class="field">
+    <label for="${id}">${label}</label>
+    <input id="${id}" name="${id}" type="${type}" placeholder="${ph}" autocomplete="${auto}" value="${val(id).replace(/"/g, '&quot;')}" ${errors[id] ? 'aria-invalid="true"' : ''} required>
+    ${errors[id] ? `<p class="err">${errors[id]}</p>` : ''}
+  </div>`;
+%>
+<main class="co">
+  <div class="co-card">
+    <header class="co-brand"><a href="/">SoundGian</a></header>
+
+    <div class="co-product">
+      <div class="mini-book" aria-hidden="true"></div>
+      <div>
+        <h1><%= product.name %></h1>
+        <p class="author">Autor: Gianluca Fusaro</p>
+        <p class="co-price">$<%= product.price.toFixed(2).replace('.', ',') %></p>
+      </div>
+    </div>
+
+    <form id="checkoutForm" method="post" action="/checkout" novalidate>
+      <h2>Datos personales</h2>
+      <%- field('email', 'Tu email', 'email', 'Informa tu email para recibir la compra', 'email') %>
+      <%- field('emailConfirm', 'Confirma tu email', 'email', 'Introduce nuevamente tu email', 'off') %>
+      <%- field('name', 'Tu nombre completo', 'text', 'Introduce tu nombre completo', 'name') %>
+
+      <h2>Cupón de descuento</h2>
+      <details class="coupon" <%= (values.coupon || errors.coupon) ? 'open' : '' %>>
+        <summary>¿Tienes un cupón de descuento?</summary>
+        <div class="field">
+          <label for="coupon" class="sr">Código del cupón</label>
+          <input id="coupon" name="coupon" type="text" placeholder="Código del cupón" value="<%= val('coupon') %>" <%- errors.coupon ? 'aria-invalid="true"' : '' %>>
+          <% if (errors.coupon) { %><p class="err"><%= errors.coupon %></p><% } %>
+        </div>
+      </details>
+
+      <h2>Selecciona el método de pago</h2>
+      <% if (errors.method) { %><p class="err"><%= errors.method %></p><% } %>
+      <div class="methods">
+        <label class="method">
+          <input type="radio" name="method" value="card" <%= (val('method') || 'card') === 'card' ? 'checked' : '' %>>
+          <span class="m-title">Débito / Crédito</span>
+          <span class="m-note">Pagarás con tu tarjeta en la pasarela segura de PayPhone. No guardamos los datos de tu tarjeta.</span>
+        </label>
+        <label class="method">
+          <input type="radio" name="method" value="payphone" <%= val('method') === 'payphone' ? 'checked' : '' %>>
+          <span class="m-title">Billetera PayPhone</span>
+          <span class="m-note">Paga desde tu app PayPhone.</span>
+        </label>
+      </div>
+
+      <h2>Detalles de la compra</h2>
+      <div class="summary"><span><%= product.name %></span><b>$<%= product.price.toFixed(2).replace('.', ',') %></b></div>
+      <p class="secure">🔒 Pago seguro • Entrega inmediata por email</p>
+    </form>
+  </div>
+</main>
+
+<div class="buybar">
+  <b>$<%= product.price.toFixed(2).replace('.', ',') %></b>
+  <button class="btn" type="submit" form="checkoutForm">Comprar ahora</button>
+</div>
+<%- include('../partials/foot') %>

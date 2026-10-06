@@ -1,0 +1,10 @@
+<%- include('../partials/head') %>
+<main class="message">
+  <div class="offer">
+    <h2>Pasarela de prueba</h2>
+    <p>Simula el resultado del pago (orden <%= ref %>).</p>
+    <a class="btn" href="/checkout/callback?ref=<%= ref %>&status=ok">Pago aprobado</a>
+    <p><a href="/checkout/callback?ref=<%= ref %>&status=fail">Pago rechazado</a> · <a href="/checkout/cancel">Cancelar</a></p>
+  </div>
+</main>
+<%- include('../partials/foot') %>

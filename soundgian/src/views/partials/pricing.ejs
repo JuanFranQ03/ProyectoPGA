@@ -1,0 +1,17 @@
+<section class="pricing" id="oferta">
+  <p class="devices">Disfruta del contenido en cualquier dispositivo.</p>
+  <div class="offer">
+    <div class="bars" aria-hidden="true"><% [5,9,7,3,2,6,8,5,2,1,6,9].forEach(h => { %><i style="height:<%= h * 7 %>px"></i><% }) %></div>
+    <h2>¡Oferta Por Tiempo Limitado!</h2>
+    <p class="regular">PRECIO REGULAR: <s>$<%= product.regularPrice.toFixed(2) %> USD</s></p>
+    <p class="today">HOY SOLO</p>
+    <p class="price"><%= product.price.toFixed(2).replace('.', ',') %><sup>USD</sup></p>
+    <ul class="checks">
+      <li>+100 páginas de contenido práctico</li>
+      <li>Acceso inmediato tras la compra</li>
+      <li>Compatible con todos los dispositivos</li>
+    </ul>
+    <a class="btn btn-block" href="/checkout">APROVECHAR OFERTA AHORA <span aria-hidden="true">→</span></a>
+    <p class="secure">🔒 Pago 100% seguro • Entrega inmediata por email</p>
+  </div>
+</section>
